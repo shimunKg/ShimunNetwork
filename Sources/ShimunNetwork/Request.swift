@@ -16,4 +16,24 @@ public struct Request: HTTPRequest {
     public var headers: [String : String]?
     public var method: HTTPMethod
     public var body: HTTPBody?
+    
+    public init(
+        scheme: Scheme,
+        host: String,
+        path: String,
+        port: Int? = nil,
+        queryParameters: [String : String]? = nil,
+        headers: [String : String]? = nil,
+        method: HTTPMethod,
+        body: HTTPBody? = nil
+    ) {
+        self.scheme = scheme
+        self.host = host
+        self.path = path
+        self.port = port
+        self.queryParameters = queryParameters
+        self.headers = headers
+        self.method = method
+        self.body = body
+    }
 }
