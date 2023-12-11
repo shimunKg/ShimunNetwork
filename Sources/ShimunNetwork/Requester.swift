@@ -13,8 +13,12 @@ final public class Requester: HTTPRequester {
     let session: URLSession
     var decoder: GenericDecoder?
     
-    public init(session: URLSession) {
+    init(
+        session: URLSession = URLSession.shared,
+        decoder: GenericDecoder? = JSONDecoder()
+    ) {
         self.session = session
+        self.decoder = decoder
     }
     
     public func send<T, R>(_ request: T, expect: R.Type) async throws -> HTTPSRequestFetch<R> where T: HTTPRequest, R: Decodable {
