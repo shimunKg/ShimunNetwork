@@ -13,7 +13,7 @@ final public class Requester: HTTPRequester {
     let session: URLSession
     var decoder: GenericDecoder?
     
-    init(
+    public init(
         session: URLSession = URLSession.shared,
         decoder: GenericDecoder? = JSONDecoder()
     ) {

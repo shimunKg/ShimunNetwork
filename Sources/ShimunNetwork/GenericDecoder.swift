@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol GenericDecoder {
+public protocol GenericDecoder {
     func decode<T>(expect type: T.Type, from data: Data) throws -> T where T: Decodable
 }
 
 extension JSONDecoder: GenericDecoder {
     
-    func decode<T>(expect type: T.Type, from data: Data) throws -> T where T: Decodable {
+    public func decode<T>(expect type: T.Type, from data: Data) throws -> T where T: Decodable {
         return try decode(type, from: data)
     }
 }
