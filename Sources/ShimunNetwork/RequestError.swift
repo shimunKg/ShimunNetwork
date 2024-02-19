@@ -13,6 +13,7 @@ public enum SHError: Error {
     case unexpectedResponse
     case decodeFailure
     case networkError(URLError) // A case to encapsulate URLError
+    case customError(Error)
 
     var description: String {
         switch self {
@@ -24,6 +25,8 @@ public enum SHError: Error {
             return "Failed to decode the response."
         case .networkError(let urlError):
             return "Network error: \(urlError.localizedDescription)"
+        case .customError(let error):
+            return ""
         }
     }
 }

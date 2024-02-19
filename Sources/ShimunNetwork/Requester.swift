@@ -21,24 +21,25 @@ final public class Requester: HTTPRequester {
         self.decoder = decoder
     }
     
-    public func send<T, R>(_ request: T, expect: R.Type) async throws -> HTTPSRequestFetch<R> where T: HTTPRequest, R: Decodable {
+    public func send(_ request: HTTPRequest) async throws -> (data: Data, response: URLResponse)/*HTTPSRequestFetch<R> where T: HTTPRequest, R: Decodable*/ {
         
         guard let urlRequest = request.composeRequest() else {
             throw SHError.requestCompositionFailure
         }
-        
         do {
             let (data, response) = try await session.data(for: urlRequest)
-            guard let response = response as? HTTPURLResponse else {
-                throw SHError.unexpectedResponse
-            }
-            
-            guard let decoder = decoder else {
-                throw SHError.decodeFailure
-            }
-            
-            let result = try decoder.decode(expect: R.self, from: data)
-            return .init(result: result, response: response)
+            return (data: data ,response: response)
+//            
+//            guard let response = response as? HTTPURLResponse else {
+//                throw SHError.unexpectedResponse
+//            }
+//            
+//            guard let decoder = decoder else {
+//                throw SHError.decodeFailure
+//            }
+//            
+//            let result = try decoder.decode(expect: R.self, from: data)
+//            return .init(result: result, response: response)
             
         } catch let error as URLError {
             throw SHError.networkError(error)

@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol HTTPRequester {
-    func send<T: HTTPRequest, R: Decodable>(_ request: T, expect: R.Type) async throws -> HTTPSRequestFetch<R>
+    func send(_ request: HTTPRequest) async throws -> (data: Data, response: URLResponse) //HTTPSRequestFetch<R>
 }
